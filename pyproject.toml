@@ -3,7 +3,7 @@ name = "python-rye-template"
 version = "0.1.0"
 description = "Template for Python projects using Rye"
 authors = [
-    { name = "MIZUNO Kosuke", email = "22116692+hanamizuno@users.noreply.github.com" },
+  { name = "MIZUNO Kosuke", email = "22116692+hanamizuno@users.noreply.github.com" },
 ]
 dependencies = []
 readme = "README.md"
@@ -16,11 +16,11 @@ build-backend = "hatchling.build"
 [tool.rye]
 managed = true
 dev-dependencies = [
-    "pyright>=1.1.370",
-    "pytest>=8.2.2",
-    "pytest-cov>=5.0.0",
-    "pytest-asyncio>=0.23.7",
-    "ruff>=0.5.0",
+  "pyright>=1.1.370",
+  "pytest>=8.2.2",
+  "pytest-cov>=5.0.0",
+  "pytest-asyncio>=0.23.7",
+  "ruff>=0.5.0",
 ]
 
 [tool.hatch.metadata]
@@ -28,3 +28,59 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/python_rye_template"]
+
+[tool.ruff]
+line-length = 79
+target-version = "py312"
+# extend-exclude = ["hoge/"]
+
+[tool.ruff.lint]
+select = [
+  # https://beta.ruff.rs/docs/rules/
+  "E",
+  "F",
+  "W",
+  "C90",
+  "I",
+  "N",
+  "D",
+  "UP",
+  "B",
+  "A",
+  "COM",
+  "C4",
+  "EM",
+  "FA",
+  "ISC",
+  "INP",
+  "PIE",
+  "PYI",
+  "PT",
+  "Q",
+  "SLF",
+  "SIM",
+  "TCH",
+  "PTH",
+  "RUF",
+  "ERA",
+  "PGH",
+  "PLR",
+  "PLW",
+]
+ignore = ["COM812", "D203", "D213", "D415", "ISC001"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportIncompatibleMethodOverride = false
+reportMissingTypeStubs = false
+reportUnknownArgumentType = true
+reportUnknownMemberType = true
+reportUnknownVariableType = true
+pythonVersion = "3.12"
+exclude = [".venv/**"]
