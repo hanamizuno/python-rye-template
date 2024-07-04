@@ -23,6 +23,15 @@ dev-dependencies = [
   "ruff>=0.5.0",
 ]
 
+[tool.rye.scripts]
+"lint:ruff" = "ruff check ."
+"lint:pyright" = "pyright"
+lint = { chain = ["lint:ruff", "lint:pyright"] }
+fix = "ruff check --fix ."
+format = "ruff format ."
+test = "pytest"
+test_cov = "pytest --cov=app --cov-report=html --cov-report=term"
+
 [tool.hatch.metadata]
 allow-direct-references = true
 
