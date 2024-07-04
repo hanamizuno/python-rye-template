@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: editorconfig-checker/action-editorconfig-checker@main
+      - name: Check files with .editorconfig
+        run: editorconfig-checker
+      - name: Install Rye
+        run: |
+          curl -sSf https://rye.astral.sh/get | RYE_INSTALL_OPTION="--yes" bash
+          echo "$HOME/.rye/shims" >> $GITHUB_PATH
+      - name: Install Dependencies
+        run: rye sync --no-lock
+      - name: Check Python files with Ruff
+        run: |
+          rye run ruff --version
+          rye run ruff check --output-format=github .
+          rye run ruff format . --check --diff
+      - name: Check Python files with Pyright
+        run: |
+          rye run pyright --version
+          rye run pyright
+      - name: Test with Pytest
+        run: rye run pytest
