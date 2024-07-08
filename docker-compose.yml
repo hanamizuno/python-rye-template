@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: rye
+    # ports:
+    #   - 8000:8000
+    # volumes:
+    #   - ./logs:/workspace/logs
+    command: rye run python
+    # depends_on:
+    #   - db
+
+  # db:
+  #   image: postgres:16.2
+  #   volumes:
+  #     - ./db:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=hogehoge
+  #     - PGDATA=/var/lib/postgresql/data/pgdata
+  #   ports:
+  #     - 5432:5432
